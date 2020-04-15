@@ -53,12 +53,12 @@ class ServerProtokol(asyncio.Protocol):
 
 
     def send_message(self, content: str):
-        message = f"{self.login}: {content}".encode()
+        message = f"{self.login}: {content}"
         self.server.messag_list.append((message))
         all_message = self.server.messag_list
         if len(all_message) > 10:  #удаление лишних сообщений
             self.server.messag_list.pop(0)
-        mess_all_users(self,message)
+        mess_all_users(self,message.encode())
 
 
 class Server:
